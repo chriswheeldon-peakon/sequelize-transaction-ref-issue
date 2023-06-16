@@ -1,20 +1,5 @@
-This is intended as a minimal reproducible example for https://github.com/sequelize/sequelize/issues/15749
+# Introduction
 
-## Instructions
+This is intended to reproduce an issue we have encountered on Sequelize v6 since the introduction of https://github.com/sequelize/sequelize/pull/15818.
 
-Firstly, copy `.env.example` to `.env` and set the variables to configure the postgres instance and database to connect to in `index.js`.
-
-Secondly, install dependencies with `npm i`.
-
-Then, `npm run start` to reproduce the bug.
-
-An exception should be printed that shows the malformed select query **n.b.** that the table alias is prefixed with the schema, in this case "dev".
-
-```
-Executing (default): SELECT "id", "prop", "createdAt", "updatedAt"
-  FROM "dev"."entity" AS "Entity" WHERE "dev"."Entity"."prop" = 'hello, world' LIMIT 1;
-
-...
-
-DatabaseError [SequelizeDatabaseError]: invalid reference to FROM-clause entry for table "Entity"
-```
+This change copied the transaction onto the options object during load/update/etc operations and that reference seems to be retained through the \_options object on the returned model (but only on included relations, not the model itself!).
