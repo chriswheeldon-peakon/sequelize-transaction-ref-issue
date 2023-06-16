@@ -6,6 +6,8 @@ This change copied the transaction onto the options object during load/update/et
 
 In our code we are, indirectly, storing a promise for the loaded model on the sequelize transaction, and then, once loaded, we store a reference to the model itself on cls. We, therefore, indirectly store a reference to a promise on cls and the cls state associated with this promise can now never be destroyed.
 
+Here is a diagram of the references:
+
 ```mermaid
 graph TD
     CLS --> |unreferenced after transaction| transaction
