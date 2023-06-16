@@ -4,7 +4,7 @@ This is intended to reproduce an issue we have encountered on Sequelize v6 since
 
 This change copied the transaction onto the options object during load/update/etc operations and that reference seems to be retained through the \_options object on the returned model (but only on included relations, not the model itself!).
 
-The code in index.js will, every one second, create a new cls context and run a transaction within it. In this transaction a model will be loaded with a relation included. The promise to load the model and the model, once laoded, will both be stored on the cls context. If you take a heapsnapshot you will see that one instance of the model per execution of the transaction will be retained.
+The code in index.js will, every one second, create a new cls context and run a transaction within it. In this transaction a model will be loaded with a relation included. The promise to load the model and the model, once loaded, will both be stored on the cls context. If you take a heapsnapshot you will see that one instance of the model per execution of the transaction will be retained.
 
 In our code we are, indirectly, storing a promise for the loaded model on the sequelize transaction, and then, once loaded, we store a reference to the model itself on cls. We, therefore, indirectly store a reference to a promise on cls and the cls state associated with this promise can now never be destroyed.
 
