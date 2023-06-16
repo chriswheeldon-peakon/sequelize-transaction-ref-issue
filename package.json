@@ -1,0 +1,18 @@
+{
+  "name": "test",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Reproduction case for postgres table alias handling bug",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Christopher Wheeldon",
+  "dependencies": {
+    "cls-hooked": "^4.2.2",
+    "dotenv": "^16.0.3",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.32.0"
+  }
+}
