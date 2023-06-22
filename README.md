@@ -19,6 +19,6 @@ graph TD
     P --> model
 ```
 
-Here is a screenshot showing how the loaded model references the transaction through the include property on _options:
+The transaction is retained through `model._options.include[].parent.transaction`.
 
 <img width="733" alt="Screenshot 2023-06-16 at 16 23 33" src="https://github.com/chriswheeldon-peakon/sequelize-transaction-ref-issue/assets/73166588/bf36cdfa-a485-482d-8ed2-812d007ebc29">
